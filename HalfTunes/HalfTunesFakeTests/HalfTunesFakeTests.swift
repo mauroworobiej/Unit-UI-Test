@@ -25,7 +25,7 @@ class HalfTunesFakeTests: XCTestCase {
         let path = testBundle.path(forResource: "abbaData", ofType: "json")
         let data = try? Data(contentsOf: URL(fileURLWithPath: path!), options: .alwaysMapped)
         
-        let url = URL(string: "https://itunes.apple.com/search?media=music&entity=song&term=abba")
+        let url = URL(string: "https://itunes.apple.com/search?media=music&entity=song&term=abba&limit=3")
         let urlResponse = HTTPURLResponse(url: url!, statusCode: 200, httpVersion: nil, headerFields: nil)
         
         let sessionMock = URLSessionMock(data: data, response: urlResponse, error: nil)
@@ -34,6 +34,7 @@ class HalfTunesFakeTests: XCTestCase {
          Inject the fake session into the app as a property of the SUT:
          */
         controllerUnderTest.defaultSession = sessionMock
+        _ = controllerUnderTest.view 
 
     }
     
